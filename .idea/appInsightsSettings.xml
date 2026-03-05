@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="uk.ac.tees.mad.tapnote" />
+                  <option name="mobileSdkAppId" value="1:757177790562:android:1e21a98234e233bae0613b" />
+                  <option name="projectId" value="tapnote-ccb05" />
+                  <option name="projectNumber" value="757177790562" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

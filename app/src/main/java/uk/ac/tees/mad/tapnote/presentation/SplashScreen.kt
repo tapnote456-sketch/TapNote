@@ -1,4 +1,4 @@
-package uk.ac.tees.mad.tapnote.presentation.screens
+package uk.ac.tees.mad.tapnote.presentation
 
 import uk.ac.tees.mad.tapnote.R
 import androidx.compose.foundation.Image

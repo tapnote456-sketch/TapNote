@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import uk.ac.tees.mad.tapnote.presentation.screens.HomeScreen
-import uk.ac.tees.mad.tapnote.presentation.screens.SplashScreen
+import uk.ac.tees.mad.tapnote.presentation.HomeScreen
+import uk.ac.tees.mad.tapnote.presentation.SplashScreen
 
 @Composable
 fun TapNoteNavGraph() {
