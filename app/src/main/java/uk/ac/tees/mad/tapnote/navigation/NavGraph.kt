@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import uk.ac.tees.mad.tapnote.presentation.HomeScreen
 import uk.ac.tees.mad.tapnote.presentation.SplashScreen
+import uk.ac.tees.mad.tapnote.presentation.auth.AuthScreen
 
 @Composable
 fun TapNoteNavGraph() {
@@ -20,7 +21,7 @@ fun TapNoteNavGraph() {
         composable<Splash> {
             SplashScreen(
                 onNavigateNext = {
-                    navController.navigate(Home) {
+                    navController.navigate(Auth) {
                         popUpTo<Splash> { inclusive = true }
                     }
                 }
@@ -29,6 +30,16 @@ fun TapNoteNavGraph() {
 
         composable<Home> {
             HomeScreen()
+        }
+
+        composable<Auth> {
+            AuthScreen(
+                onAuthSuccess = {
+                    navController.navigate(Home) {
+                        popUpTo<Auth> { inclusive = true }
+                    }
+                }
+            )
         }
     }
 }
