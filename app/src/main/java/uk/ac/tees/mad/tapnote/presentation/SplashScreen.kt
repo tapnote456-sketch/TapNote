@@ -18,16 +18,24 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.delay
 import uk.ac.tees.mad.tapnote.ui.theme.TapNoteTheme
 
 @Composable
 fun SplashScreen(
-    onNavigateNext: () -> Unit
+    onNavigateToHome: () -> Unit,
+    onNavigateToAuth: () -> Unit
 ) {
     LaunchedEffect(Unit) {
         delay(2000)
-        onNavigateNext()
+
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if (currentUser != null) {
+            onNavigateToHome()
+        } else {
+            onNavigateToAuth()
+        }
     }
 
     Box(
@@ -60,6 +68,9 @@ fun SplashScreen(
 @Composable
 fun SplashPreview() {
     TapNoteTheme {
-        SplashScreen(onNavigateNext = {})
+        SplashScreen(
+            onNavigateToHome = {},
+            onNavigateToAuth = {}
+        )
     }
 }

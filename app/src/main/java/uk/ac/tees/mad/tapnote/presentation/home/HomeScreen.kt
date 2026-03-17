@@ -1,4 +1,4 @@
-package uk.ac.tees.mad.tapnote.presentation
+package uk.ac.tees.mad.tapnote.presentation.home
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
