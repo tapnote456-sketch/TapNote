@@ -10,8 +10,6 @@ import uk.ac.tees.mad.tapnote.ui.theme.TapNoteTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-
         setContent {
             TapNoteTheme {
                 TapNoteNavGraph()
