@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import uk.ac.tees.mad.tapnote.presentation.note.NoteUiModel
+import uk.ac.tees.mad.tapnote.presentation.home.NoteUiModel
 import uk.ac.tees.mad.tapnote.ui.theme.TapNoteTheme
 
 @Composable
