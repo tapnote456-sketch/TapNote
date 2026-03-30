@@ -1,12 +1,14 @@
 package uk.ac.tees.mad.tapnote.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import uk.ac.tees.mad.tapnote.presentation.home.HomeScreen
 import uk.ac.tees.mad.tapnote.presentation.SplashScreen
 import uk.ac.tees.mad.tapnote.presentation.auth.AuthScreen
+import uk.ac.tees.mad.tapnote.presentation.home.HomeViewModel
 import uk.ac.tees.mad.tapnote.presentation.note.NoteDetailScreen
 import uk.ac.tees.mad.tapnote.presentation.note.NoteDetailUiModel
 
@@ -36,7 +38,11 @@ fun TapNoteNavGraph() {
         }
 
         composable<Home> {
+
+            val homeViewModel: HomeViewModel = viewModel()
+
             HomeScreen(
+                viewModel = homeViewModel,
                 onNoteClick = { note ->
                     navController.navigate(
                         NoteDetail(noteId = note.id)
@@ -49,6 +55,7 @@ fun TapNoteNavGraph() {
                 }
             )
         }
+
 
         composable<Auth> {
             AuthScreen(
