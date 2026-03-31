@@ -10,7 +10,7 @@ import uk.ac.tees.mad.tapnote.presentation.SplashScreen
 import uk.ac.tees.mad.tapnote.presentation.auth.AuthScreen
 import uk.ac.tees.mad.tapnote.presentation.home.HomeViewModel
 import uk.ac.tees.mad.tapnote.presentation.note.NoteDetailScreen
-import uk.ac.tees.mad.tapnote.presentation.note.NoteDetailUiModel
+import uk.ac.tees.mad.tapnote.presentation.note.NoteDetailViewModel
 
 @Composable
 fun TapNoteNavGraph() {
@@ -68,28 +68,17 @@ fun TapNoteNavGraph() {
         }
 
         composable<NoteDetail> { backStackEntry ->
-            val noteId = backStackEntry.arguments
-                ?.getLong("noteId") ?: -1L
 
-            val note = if (noteId == -1L) {
-                NoteDetailUiModel(
-                    id = -1,
-                    content = "",
-                    timestamp = "New note"
-                )
-            } else {
-                NoteDetailUiModel(
-                    id = noteId,
-                    content = "Loaded note content for id=$noteId",
-                    timestamp = "Loaded from DB"
-                )
-            }
+            val viewModel: NoteDetailViewModel = viewModel()
+            val noteId = backStackEntry.arguments?.getLong("noteId") ?: -1L
 
             NoteDetailScreen(
-                note = note,
-                onEditClick = { }
+                viewModel = viewModel,
+                noteId = noteId,
+                onBack = { navController.popBackStack() }
             )
         }
 
     }
+
 }

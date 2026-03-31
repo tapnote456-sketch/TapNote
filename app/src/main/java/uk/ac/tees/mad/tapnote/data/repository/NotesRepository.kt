@@ -19,4 +19,7 @@ class NotesRepository(
 
     suspend fun deleteNote(note: NoteEntity) =
         noteDao.deleteNote(note)
+
+    suspend fun updateNote(id: Long, content: String) =
+        noteDao.updateNote(id, content)
 }

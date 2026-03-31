@@ -23,7 +23,8 @@ import androidx.compose.ui.unit.dp
 fun HomeContent(
     notes: List<NoteUiModel>,
     onAddNoteClick: () -> Unit,
-    onNoteClick: (NoteUiModel) -> Unit
+    onNoteClick: (NoteUiModel) -> Unit,
+    onDeleteNote: (NoteUiModel) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -81,7 +82,8 @@ fun HomeContent(
                 items(notes) { note ->
                     NoteItem(
                         note = note,
-                        onClick = { onNoteClick(note) }
+                        onClick = { onNoteClick(note) },
+                        onDelete = { onDeleteNote(note) },
                     )
                 }
             }

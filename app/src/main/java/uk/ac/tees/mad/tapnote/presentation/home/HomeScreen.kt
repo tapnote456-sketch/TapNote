@@ -17,7 +17,8 @@ fun HomeScreen(
     HomeContent(
         notes = notes,
         onAddNoteClick = onAddNoteClick,
-        onNoteClick = onNoteClick
+        onNoteClick = onNoteClick,
+        onDeleteNote = viewModel::deleteNote
     )
 }
 
@@ -39,7 +40,8 @@ fun HomePreview() {
                 )
             ),
             onAddNoteClick = {},
-            onNoteClick = {}
+            onNoteClick = {},
+            onDeleteNote = {}
         )
     }
 }

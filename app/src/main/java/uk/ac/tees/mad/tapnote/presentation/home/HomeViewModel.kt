@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 import uk.ac.tees.mad.tapnote.data.local.database.TapNoteDatabase
 import uk.ac.tees.mad.tapnote.data.local.entity.NoteEntity
 import uk.ac.tees.mad.tapnote.data.repository.NotesRepository
+import uk.ac.tees.mad.tapnote.presentation.util.toUiModel
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -25,17 +26,6 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                 started = SharingStarted.WhileSubscribed(5_000),
                 initialValue = emptyList()
             )
-
-    fun addNote(content: String) {
-        viewModelScope.launch {
-            repository.insertNote(
-                NoteEntity(
-                    content = content,
-                    timestamp = System.currentTimeMillis()
-                )
-            )
-        }
-    }
 
     fun deleteNote(note: NoteUiModel) {
         viewModelScope.launch {
