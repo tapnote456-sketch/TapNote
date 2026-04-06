@@ -11,6 +11,8 @@ import uk.ac.tees.mad.tapnote.presentation.auth.AuthScreen
 import uk.ac.tees.mad.tapnote.presentation.home.HomeViewModel
 import uk.ac.tees.mad.tapnote.presentation.note.NoteDetailScreen
 import uk.ac.tees.mad.tapnote.presentation.note.NoteDetailViewModel
+import uk.ac.tees.mad.tapnote.presentation.settings.SettingsScreen
+import uk.ac.tees.mad.tapnote.presentation.settings.SettingsViewModel
 
 @Composable
 fun TapNoteNavGraph() {
@@ -39,10 +41,10 @@ fun TapNoteNavGraph() {
 
         composable<Home> {
 
-            val homeViewModel: HomeViewModel = viewModel()
+            val viewModel: HomeViewModel = viewModel()
 
             HomeScreen(
-                viewModel = homeViewModel,
+                viewModel = viewModel,
                 onNoteClick = { note ->
                     navController.navigate(
                         NoteDetail(noteId = note.id)
@@ -79,6 +81,19 @@ fun TapNoteNavGraph() {
             )
         }
 
-    }
+        composable<Settings> {
 
+            val viewModel: SettingsViewModel = viewModel()
+
+            SettingsScreen(
+                viewModel = viewModel,
+                onLogout = {
+                    viewModel.logout()
+                    navController.navigate(Auth) {
+                        popUpTo<Home> { inclusive = true }
+                    }
+                }
+            )
+        }
+    }
 }

@@ -22,4 +22,7 @@ class NotesRepository(
 
     suspend fun updateNote(id: Long, content: String) =
         noteDao.updateNote(id, content)
+
+    suspend fun clearAllNotes() =
+        noteDao.clearAllNotes()
 }

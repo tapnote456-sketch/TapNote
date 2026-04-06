@@ -13,3 +13,6 @@ object Auth
 
 @Serializable
 data class NoteDetail(val noteId: Long)
+
+@Serializable
+object Settings
