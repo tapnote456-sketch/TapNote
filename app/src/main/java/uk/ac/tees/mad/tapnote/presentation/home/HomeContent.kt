@@ -21,13 +21,14 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun HomeContent(
+    modifier: Modifier = Modifier,
     notes: List<NoteUiModel>,
     onAddNoteClick: () -> Unit,
     onNoteClick: (NoteUiModel) -> Unit,
     onDeleteNote: (NoteUiModel) -> Unit
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
             .padding(16.dp)
@@ -39,14 +40,6 @@ fun HomeContent(
                 fontWeight = FontWeight.Bold
             ),
             color = MaterialTheme.colorScheme.onBackground
-        )
-
-        Spacer(Modifier.height(8.dp))
-
-        Text(
-            text = "Shake phone to add a quick note",
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.primary
         )
 
         Spacer(Modifier.height(16.dp))

@@ -3,11 +3,13 @@ package uk.ac.tees.mad.tapnote.presentation.home
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import uk.ac.tees.mad.tapnote.ui.theme.TapNoteTheme
 
 @Composable
 fun HomeScreen(
+    modifier: Modifier = Modifier,
     viewModel: HomeViewModel,
     onAddNoteClick: () -> Unit = {},
     onNoteClick: (NoteUiModel) -> Unit = {},
@@ -15,6 +17,7 @@ fun HomeScreen(
     val notes by viewModel.notes.collectAsState()
 
     HomeContent(
+        modifier = modifier,
         notes = notes,
         onAddNoteClick = onAddNoteClick,
         onNoteClick = onNoteClick,

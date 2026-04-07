@@ -1,12 +1,13 @@
 package uk.ac.tees.mad.tapnote.presentation.settings
 
-import android.app.Application
+import androidx.compose.ui.Modifier
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import uk.ac.tees.mad.tapnote.ui.theme.TapNoteTheme
 
 @Composable
 fun SettingsScreen(
+    modifier: Modifier = Modifier,
     viewModel: SettingsViewModel,
     onLogout: () -> Unit
 ) {
@@ -14,7 +15,8 @@ fun SettingsScreen(
         hapticEnabled = viewModel.hapticEnabled,
         onToggleHaptic = { viewModel.hapticEnabled = it },
         onClearAll = { viewModel.clearAllNotes() },
-        onLogout = onLogout
+        onLogout = onLogout,
+        modifier = modifier
     )
 }
 
@@ -26,7 +28,7 @@ fun SettingsPreview() {
             hapticEnabled = true,
             onToggleHaptic = {},
             onClearAll = {},
-            onLogout = {}
+            onLogout = {},
         )
     }
 }

@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun NoteDetailContent(
+    modifier: Modifier = Modifier,
     note: NoteDetailUiModel,
     text: String,
     onTextChange: (String) -> Unit,
@@ -33,7 +34,7 @@ fun NoteDetailContent(
     var showDeleteDialog by remember { mutableStateOf(false) }
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
             .padding(20.dp)

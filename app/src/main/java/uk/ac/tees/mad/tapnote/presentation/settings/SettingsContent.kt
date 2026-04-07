@@ -30,12 +30,13 @@ fun SettingsContent(
     hapticEnabled: Boolean,
     onToggleHaptic: (Boolean) -> Unit,
     onClearAll: () -> Unit,
-    onLogout: () -> Unit
+    onLogout: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     var showClearDialog by remember { mutableStateOf(false) }
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
             .padding(20.dp)

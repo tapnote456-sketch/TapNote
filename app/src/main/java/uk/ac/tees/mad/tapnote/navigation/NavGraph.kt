@@ -1,13 +1,16 @@
 package uk.ac.tees.mad.tapnote.navigation
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import uk.ac.tees.mad.tapnote.presentation.home.HomeScreen
-import uk.ac.tees.mad.tapnote.presentation.SplashScreen
+import uk.ac.tees.mad.tapnote.presentation.components.SplashScreen
 import uk.ac.tees.mad.tapnote.presentation.auth.AuthScreen
+import uk.ac.tees.mad.tapnote.presentation.components.TapNoteScaffold
 import uk.ac.tees.mad.tapnote.presentation.home.HomeViewModel
 import uk.ac.tees.mad.tapnote.presentation.note.NoteDetailScreen
 import uk.ac.tees.mad.tapnote.presentation.note.NoteDetailViewModel
@@ -43,19 +46,21 @@ fun TapNoteNavGraph() {
 
             val viewModel: HomeViewModel = viewModel()
 
-            HomeScreen(
-                viewModel = viewModel,
-                onNoteClick = { note ->
-                    navController.navigate(
-                        NoteDetail(noteId = note.id)
-                    )
-                },
-                onAddNoteClick = {
-                    navController.navigate(
-                        NoteDetail(noteId = -1L)
-                    )
-                }
-            )
+            TapNoteScaffold(
+                showTopBar = true,
+                onSettingsClick = { navController.navigate(Settings) }
+            ) { padding ->
+                HomeScreen(
+                    modifier = Modifier.padding(padding),
+                    viewModel = viewModel,
+                    onAddNoteClick = {
+                        navController.navigate(NoteDetail(noteId = -1L))
+                    },
+                    onNoteClick = { note ->
+                        navController.navigate(NoteDetail(noteId = note.id))
+                    }
+                )
+            }
         }
 
 
@@ -74,26 +79,38 @@ fun TapNoteNavGraph() {
             val viewModel: NoteDetailViewModel = viewModel()
             val noteId = backStackEntry.arguments?.getLong("noteId") ?: -1L
 
-            NoteDetailScreen(
-                viewModel = viewModel,
-                noteId = noteId,
-                onBack = { navController.popBackStack() }
-            )
+            TapNoteScaffold(
+                showTopBar = true,
+                onSettingsClick = { navController.navigate(Settings) }
+            ) { padding ->
+                NoteDetailScreen(
+                    viewModel = viewModel,
+                    noteId = noteId,
+                    onBack = { navController.popBackStack() },
+                    modifier = Modifier.padding(padding),
+                )
+            }
         }
 
         composable<Settings> {
 
             val viewModel: SettingsViewModel = viewModel()
 
-            SettingsScreen(
-                viewModel = viewModel,
-                onLogout = {
-                    viewModel.logout()
-                    navController.navigate(Auth) {
-                        popUpTo<Home> { inclusive = true }
-                    }
-                }
-            )
+            TapNoteScaffold(
+                showTopBar = true,
+                onSettingsClick = {}
+            ) {padding ->
+                SettingsScreen(
+                    viewModel = viewModel,
+                    onLogout = {
+                        viewModel.logout()
+                        navController.navigate(Auth) {
+                            popUpTo<Home> { inclusive = true }
+                        }
+                    },
+                    modifier = Modifier.padding(padding),
+                )
+            }
         }
     }
 }

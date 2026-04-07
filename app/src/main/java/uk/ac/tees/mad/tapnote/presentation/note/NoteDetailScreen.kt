@@ -7,11 +7,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import uk.ac.tees.mad.tapnote.ui.theme.TapNoteTheme
 
 @Composable
 fun NoteDetailScreen(
+    modifier: Modifier = Modifier,
     viewModel: NoteDetailViewModel,
     noteId: Long,
     onBack: () -> Unit
@@ -38,7 +40,8 @@ fun NoteDetailScreen(
             onDelete = {
                 viewModel.delete()
                 onBack()
-            }
+            },
+            modifier = modifier
         )
     }
 }
