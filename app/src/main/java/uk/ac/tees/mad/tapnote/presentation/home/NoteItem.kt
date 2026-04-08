@@ -96,7 +96,6 @@ fun NoteItem(
     )
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun NoteItemPreview() {

@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import uk.ac.tees.mad.tapnote.data.local.database.TapNoteDatabase
 import uk.ac.tees.mad.tapnote.data.local.entity.NoteEntity
 import uk.ac.tees.mad.tapnote.data.repository.NotesRepository
-import uk.ac.tees.mad.tapnote.presentation.util.toUiModel
+import uk.ac.tees.mad.tapnote.presentation.utils.toUiModel
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
 

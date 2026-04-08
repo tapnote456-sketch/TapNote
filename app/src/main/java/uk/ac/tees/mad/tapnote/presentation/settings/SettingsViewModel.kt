@@ -20,10 +20,16 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
         get() = prefs.hapticEnabled
         set(value) { prefs.hapticEnabled = value }
 
+    var shakeEnabled: Boolean
+        get() = prefs.shakeEnabled
+        set(value) { prefs.shakeEnabled = value }
+
+    var shakeSensitivity: Float
+        get() = prefs.shakeSensitivity
+        set(value) { prefs.shakeSensitivity = value }
+
     fun clearAllNotes() {
-        viewModelScope.launch {
-            repository.clearAllNotes()
-        }
+        viewModelScope.launch { repository.clearAllNotes() }
     }
 
     fun logout() {

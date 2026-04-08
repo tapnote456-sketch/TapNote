@@ -1,4 +1,4 @@
-package uk.ac.tees.mad.tapnote.presentation.util
+package uk.ac.tees.mad.tapnote.presentation.utils
 
 import uk.ac.tees.mad.tapnote.data.local.entity.NoteEntity
 import uk.ac.tees.mad.tapnote.presentation.home.NoteUiModel

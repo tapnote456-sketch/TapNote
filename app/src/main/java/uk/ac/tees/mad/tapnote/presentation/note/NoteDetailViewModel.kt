@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 import uk.ac.tees.mad.tapnote.data.local.database.TapNoteDatabase
 import uk.ac.tees.mad.tapnote.data.local.entity.NoteEntity
 import uk.ac.tees.mad.tapnote.data.repository.NotesRepository
-import uk.ac.tees.mad.tapnote.presentation.util.toDetailUi
+import uk.ac.tees.mad.tapnote.presentation.utils.toDetailUi
 
 class NoteDetailViewModel(
     application: Application

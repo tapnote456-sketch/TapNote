@@ -11,4 +11,12 @@ class SettingsPreferences(context: Context) {
     var hapticEnabled: Boolean
         get() = prefs.getBoolean("haptic_enabled", true)
         set(value) = prefs.edit { putBoolean("haptic_enabled", value) }
+
+    var shakeEnabled: Boolean
+        get() = prefs.getBoolean("shake_enabled", true)
+        set(value) = prefs.edit { putBoolean("shake_enabled", value) }
+
+    var shakeSensitivity: Float
+        get() = prefs.getFloat("shake_sensitivity", 13f)
+        set(value) = prefs.edit { putFloat("shake_sensitivity", value) }
 }

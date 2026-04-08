@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -14,13 +15,12 @@ import uk.ac.tees.mad.tapnote.presentation.components.TapNoteScaffold
 import uk.ac.tees.mad.tapnote.presentation.home.HomeViewModel
 import uk.ac.tees.mad.tapnote.presentation.note.NoteDetailScreen
 import uk.ac.tees.mad.tapnote.presentation.note.NoteDetailViewModel
+import uk.ac.tees.mad.tapnote.presentation.quicknote.QuickNoteScreen
 import uk.ac.tees.mad.tapnote.presentation.settings.SettingsScreen
 import uk.ac.tees.mad.tapnote.presentation.settings.SettingsViewModel
 
 @Composable
-fun TapNoteNavGraph() {
-
-    val navController = rememberNavController()
+fun TapNoteNavGraph(navController: NavHostController) {
 
     NavHost(
         navController = navController,
@@ -99,7 +99,7 @@ fun TapNoteNavGraph() {
             TapNoteScaffold(
                 showTopBar = true,
                 onSettingsClick = {}
-            ) {padding ->
+            ) { padding ->
                 SettingsScreen(
                     viewModel = viewModel,
                     onLogout = {
@@ -111,6 +111,14 @@ fun TapNoteNavGraph() {
                     modifier = Modifier.padding(padding),
                 )
             }
+        }
+
+        composable<QuickNote> {
+            QuickNoteScreen(
+                onSaveClick = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 }

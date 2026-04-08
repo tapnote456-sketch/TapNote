@@ -14,6 +14,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Slider
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -28,11 +29,16 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun SettingsContent(
     hapticEnabled: Boolean,
+    shakeEnabled: Boolean,
+    shakeSensitivity: Float,
     onToggleHaptic: (Boolean) -> Unit,
+    onToggleShake: (Boolean) -> Unit,
+    onSensitivityChange: (Float) -> Unit,
     onClearAll: () -> Unit,
     onLogout: () -> Unit,
     modifier: Modifier = Modifier
-) {
+)
+ {
     var showClearDialog by remember { mutableStateOf(false) }
 
     Column(
@@ -59,6 +65,29 @@ fun SettingsContent(
                 onCheckedChange = onToggleHaptic
             )
         }
+
+        Spacer(Modifier.height(24.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text("Shake to add note")
+            Switch(
+                checked = shakeEnabled,
+                onCheckedChange = onToggleShake
+            )
+        }
+
+        Spacer(Modifier.height(24.dp))
+
+        Text("Shake sensitivity")
+
+        Slider(
+            value = shakeSensitivity,
+            onValueChange = onSensitivityChange,
+            valueRange = 8f..20f
+        )
 
         Spacer(Modifier.height(32.dp))
 

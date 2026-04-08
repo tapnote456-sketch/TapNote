@@ -13,7 +13,11 @@ fun SettingsScreen(
 ) {
     SettingsContent(
         hapticEnabled = viewModel.hapticEnabled,
+        shakeEnabled = viewModel.shakeEnabled,
+        shakeSensitivity = viewModel.shakeSensitivity,
         onToggleHaptic = { viewModel.hapticEnabled = it },
+        onToggleShake = { viewModel.shakeEnabled = it },
+        onSensitivityChange = { viewModel.shakeSensitivity = it },
         onClearAll = { viewModel.clearAllNotes() },
         onLogout = onLogout,
         modifier = modifier
@@ -26,9 +30,13 @@ fun SettingsPreview() {
     TapNoteTheme {
         SettingsContent(
             hapticEnabled = true,
+            shakeEnabled = true,
+            shakeSensitivity = 13f,
             onToggleHaptic = {},
+            onToggleShake = {},
+            onSensitivityChange = {},
             onClearAll = {},
-            onLogout = {},
+            onLogout = {}
         )
     }
 }

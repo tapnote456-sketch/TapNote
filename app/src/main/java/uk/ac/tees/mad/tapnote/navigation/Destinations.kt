@@ -16,3 +16,6 @@ data class NoteDetail(val noteId: Long)
 
 @Serializable
 object Settings
+
+@Serializable
+object QuickNote
