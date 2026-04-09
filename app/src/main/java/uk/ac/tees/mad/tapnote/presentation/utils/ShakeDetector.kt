@@ -3,6 +3,7 @@ package uk.ac.tees.mad.tapnote.presentation.utils
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import kotlin.math.sqrt
 
 class ShakeDetector(
@@ -22,7 +23,7 @@ class ShakeDetector(
         val y = event.values[1]
         val z = event.values[2]
 
-        val acceleration = sqrt(x * x + y * y + z * z)
+        val acceleration = sqrt(x * x + y * y + z * z) - SensorManager.GRAVITY_EARTH
 
         if (acceleration > getThreshold()) {
             val now = System.currentTimeMillis()

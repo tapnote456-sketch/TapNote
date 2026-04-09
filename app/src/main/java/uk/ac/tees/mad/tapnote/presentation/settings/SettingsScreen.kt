@@ -2,6 +2,8 @@ package uk.ac.tees.mad.tapnote.presentation.settings
 
 import androidx.compose.ui.Modifier
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
 import uk.ac.tees.mad.tapnote.ui.theme.TapNoteTheme
 
@@ -11,14 +13,18 @@ fun SettingsScreen(
     viewModel: SettingsViewModel,
     onLogout: () -> Unit
 ) {
+    val hapticEnabled by viewModel.hapticEnabled.collectAsState()
+    val shakeEnabled by viewModel.shakeEnabled.collectAsState()
+    val shakeSensitivity by viewModel.shakeSensitivity.collectAsState()
+
     SettingsContent(
-        hapticEnabled = viewModel.hapticEnabled,
-        shakeEnabled = viewModel.shakeEnabled,
-        shakeSensitivity = viewModel.shakeSensitivity,
-        onToggleHaptic = { viewModel.hapticEnabled = it },
-        onToggleShake = { viewModel.shakeEnabled = it },
-        onSensitivityChange = { viewModel.shakeSensitivity = it },
-        onClearAll = { viewModel.clearAllNotes() },
+        hapticEnabled = hapticEnabled,
+        shakeEnabled = shakeEnabled,
+        shakeSensitivity = shakeSensitivity,
+        onToggleHaptic = viewModel::setHapticEnabled,
+        onToggleShake = viewModel::setShakeEnabled,
+        onSensitivityChange = viewModel::setShakeSensitivity,
+        onClearAll = viewModel::clearAllNotes,
         onLogout = onLogout,
         modifier = modifier
     )

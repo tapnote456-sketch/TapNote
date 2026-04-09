@@ -16,6 +16,7 @@ import uk.ac.tees.mad.tapnote.presentation.home.HomeViewModel
 import uk.ac.tees.mad.tapnote.presentation.note.NoteDetailScreen
 import uk.ac.tees.mad.tapnote.presentation.note.NoteDetailViewModel
 import uk.ac.tees.mad.tapnote.presentation.quicknote.QuickNoteScreen
+import uk.ac.tees.mad.tapnote.presentation.quicknote.QuickNoteViewModel
 import uk.ac.tees.mad.tapnote.presentation.settings.SettingsScreen
 import uk.ac.tees.mad.tapnote.presentation.settings.SettingsViewModel
 
@@ -114,10 +115,12 @@ fun TapNoteNavGraph(navController: NavHostController) {
         }
 
         composable<QuickNote> {
+
+            val viewModel: QuickNoteViewModel = viewModel()
+
             QuickNoteScreen(
-                onSaveClick = {
-                    navController.popBackStack()
-                }
+                viewModel = viewModel,
+                onClose = { navController.popBackStack() }
             )
         }
     }

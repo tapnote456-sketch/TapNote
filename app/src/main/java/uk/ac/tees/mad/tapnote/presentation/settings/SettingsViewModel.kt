@@ -4,6 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import uk.ac.tees.mad.tapnote.data.local.database.TapNoteDatabase
 import uk.ac.tees.mad.tapnote.data.preferences.SettingsPreferences
@@ -16,17 +18,29 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
         NotesRepository(TapNoteDatabase.getInstance(application).noteDao())
     private val auth = FirebaseAuth.getInstance()
 
-    var hapticEnabled: Boolean
-        get() = prefs.hapticEnabled
-        set(value) { prefs.hapticEnabled = value }
+    private val _hapticEnabled = MutableStateFlow(prefs.hapticEnabled)
+    val hapticEnabled: StateFlow<Boolean> = _hapticEnabled
 
-    var shakeEnabled: Boolean
-        get() = prefs.shakeEnabled
-        set(value) { prefs.shakeEnabled = value }
+    private val _shakeEnabled = MutableStateFlow(prefs.shakeEnabled)
+    val shakeEnabled: StateFlow<Boolean> = _shakeEnabled
 
-    var shakeSensitivity: Float
-        get() = prefs.shakeSensitivity
-        set(value) { prefs.shakeSensitivity = value }
+    private val _shakeSensitivity = MutableStateFlow(prefs.shakeSensitivity)
+    val shakeSensitivity: StateFlow<Float> = _shakeSensitivity
+
+    fun setHapticEnabled(value: Boolean) {
+        prefs.hapticEnabled = value
+        _hapticEnabled.value = value
+    }
+
+    fun setShakeEnabled(value: Boolean) {
+        prefs.shakeEnabled = value
+        _shakeEnabled.value = value
+    }
+
+    fun setShakeSensitivity(value: Float) {
+        prefs.shakeSensitivity = value
+        _shakeSensitivity.value = value
+    }
 
     fun clearAllNotes() {
         viewModelScope.launch { repository.clearAllNotes() }

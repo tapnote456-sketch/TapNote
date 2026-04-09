@@ -17,6 +17,6 @@ class SettingsPreferences(context: Context) {
         set(value) = prefs.edit { putBoolean("shake_enabled", value) }
 
     var shakeSensitivity: Float
-        get() = prefs.getFloat("shake_sensitivity", 13f)
+        get() = prefs.getFloat("shake_sensitivity", 8f)
         set(value) = prefs.edit { putFloat("shake_sensitivity", value) }
 }

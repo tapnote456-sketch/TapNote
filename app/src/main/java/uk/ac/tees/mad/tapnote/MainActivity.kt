@@ -7,7 +7,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.navigation.compose.rememberNavController
 import uk.ac.tees.mad.tapnote.data.preferences.SettingsPreferences
-import uk.ac.tees.mad.tapnote.navigation.NoteDetail
 import uk.ac.tees.mad.tapnote.navigation.QuickNote
 import uk.ac.tees.mad.tapnote.navigation.TapNoteNavGraph
 import uk.ac.tees.mad.tapnote.presentation.utils.ShakeDetector
@@ -25,10 +24,8 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             TapNoteTheme {
-
                 val navController = rememberNavController()
                 val prefs = SettingsPreferences(this)
-
                 shakeDetector = ShakeDetector(
                     getThreshold = { prefs.shakeSensitivity },
                     isShakeEnabled = { prefs.shakeEnabled },
@@ -36,8 +33,6 @@ class MainActivity : ComponentActivity() {
                         navController.navigate(QuickNote)
                     }
                 )
-
-
                 TapNoteNavGraph(navController = navController)
             }
         }
@@ -60,6 +55,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onPause() {
         super.onPause()
+
         shakeDetector?.let { sensorManager.unregisterListener(it) }
     }
 }
