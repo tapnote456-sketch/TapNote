@@ -1,4 +1,4 @@
-package uk.ac.tees.mad.tapnote.presentation.utils
+package uk.ac.tees.mad.tapnote.service
 
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -13,6 +13,8 @@ class ShakeDetector(
 ) : SensorEventListener {
 
     private var lastShakeTime = 0L
+    private var lastAccel = SensorManager.GRAVITY_EARTH
+    private var accel = 0f
     private val cooldown = 800
 
     override fun onSensorChanged(event: SensorEvent?) {
@@ -23,11 +25,14 @@ class ShakeDetector(
         val y = event.values[1]
         val z = event.values[2]
 
-        val acceleration = sqrt(x * x + y * y + z * z) - SensorManager.GRAVITY_EARTH
+        val currentAccel = sqrt(x*x + y*y + z*z)
+        val delta = currentAccel - lastAccel
+        lastAccel = currentAccel
 
-        if (acceleration > getThreshold()) {
+        accel = accel * 0.9f + delta
+
+        if (accel > getThreshold()) {
             val now = System.currentTimeMillis()
-
             if (now - lastShakeTime > cooldown) {
                 lastShakeTime = now
                 onShake()

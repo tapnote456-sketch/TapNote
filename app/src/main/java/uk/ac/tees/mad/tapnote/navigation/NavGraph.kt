@@ -21,7 +21,9 @@ import uk.ac.tees.mad.tapnote.presentation.settings.SettingsScreen
 import uk.ac.tees.mad.tapnote.presentation.settings.SettingsViewModel
 
 @Composable
-fun TapNoteNavGraph(navController: NavHostController) {
+fun TapNoteNavGraph() {
+
+    val navController = rememberNavController()
 
     NavHost(
         navController = navController,
