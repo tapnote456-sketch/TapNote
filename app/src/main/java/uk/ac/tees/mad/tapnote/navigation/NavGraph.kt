@@ -4,12 +4,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import uk.ac.tees.mad.tapnote.presentation.home.HomeScreen
-import uk.ac.tees.mad.tapnote.presentation.components.SplashScreen
+import uk.ac.tees.mad.tapnote.presentation.splash.SplashScreen
 import uk.ac.tees.mad.tapnote.presentation.auth.AuthScreen
 import uk.ac.tees.mad.tapnote.presentation.components.TapNoteScaffold
 import uk.ac.tees.mad.tapnote.presentation.home.HomeViewModel
@@ -19,6 +18,7 @@ import uk.ac.tees.mad.tapnote.presentation.quicknote.QuickNoteScreen
 import uk.ac.tees.mad.tapnote.presentation.quicknote.QuickNoteViewModel
 import uk.ac.tees.mad.tapnote.presentation.settings.SettingsScreen
 import uk.ac.tees.mad.tapnote.presentation.settings.SettingsViewModel
+import uk.ac.tees.mad.tapnote.presentation.splash.SplashViewModel
 
 @Composable
 fun TapNoteNavGraph() {
@@ -31,7 +31,10 @@ fun TapNoteNavGraph() {
     ) {
 
         composable<Splash> {
+            val viewModel: SplashViewModel = viewModel()
+
             SplashScreen(
+                viewModel = viewModel,
                 onNavigateToHome = {
                     navController.navigate(Home) {
                         popUpTo<Splash> { inclusive = true }
@@ -43,6 +46,7 @@ fun TapNoteNavGraph() {
                     }
                 }
             )
+
         }
 
         composable<Home> {

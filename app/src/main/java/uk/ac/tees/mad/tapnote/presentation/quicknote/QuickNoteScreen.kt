@@ -28,7 +28,8 @@ fun QuickNoteScreen(
             viewModel.saveNote(text) {
                 onClose()
             }
-        }
+        },
+        onDismiss = onClose
     )
 }
 
@@ -39,7 +40,8 @@ private fun QuickNoteScreenPreview() {
         QuickNoteContent(
             text = "Sample quick note",
             onTextChange = {},
-            onSaveClick = {}
+            onSaveClick = {},
+            onDismiss = {}
         )
     }
 }

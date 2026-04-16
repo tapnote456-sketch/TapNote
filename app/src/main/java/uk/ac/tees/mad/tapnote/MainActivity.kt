@@ -6,9 +6,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
+import com.google.firebase.auth.FirebaseAuth
 import uk.ac.tees.mad.tapnote.navigation.TapNoteNavGraph
 import uk.ac.tees.mad.tapnote.service.ShakeService
 import uk.ac.tees.mad.tapnote.ui.theme.TapNoteTheme
+import kotlin.jvm.java
 
 class MainActivity : ComponentActivity() {
 
@@ -16,11 +18,16 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 1)
         }
 
-        startForegroundService(Intent(this, ShakeService::class.java))
+        val user = FirebaseAuth.getInstance().currentUser
+
+        if (user != null) {
+            startForegroundService(Intent(this, ShakeService::class.java))
+        }
 
         setContent {
             TapNoteTheme {

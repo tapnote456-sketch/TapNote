@@ -1,6 +1,8 @@
 package uk.ac.tees.mad.tapnote.presentation.settings
 
 import android.app.Application
+import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
@@ -10,6 +12,7 @@ import kotlinx.coroutines.launch
 import uk.ac.tees.mad.tapnote.data.local.database.TapNoteDatabase
 import uk.ac.tees.mad.tapnote.data.preferences.SettingsPreferences
 import uk.ac.tees.mad.tapnote.data.repository.NotesRepository
+import uk.ac.tees.mad.tapnote.service.ShakeService
 
 class SettingsViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -38,10 +41,11 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun setShakeSensitivity(value: Float) {
-        prefs.shakeSensitivity = value
+        val inverted = 28f - value
+
+        prefs.shakeSensitivity = inverted
         _shakeSensitivity.value = value
     }
-
     fun clearAllNotes() {
         viewModelScope.launch { repository.clearAllNotes() }
     }
