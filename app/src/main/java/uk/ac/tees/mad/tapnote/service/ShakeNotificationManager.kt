@@ -39,7 +39,7 @@ class ShakeNotificationManager(private val context: Context) {
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .setVisibility(NotificationCompat.VISIBILITY_PRIVATE)
             .build()
-    }
+    }//create channel//
 
     private fun createChannel() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return
