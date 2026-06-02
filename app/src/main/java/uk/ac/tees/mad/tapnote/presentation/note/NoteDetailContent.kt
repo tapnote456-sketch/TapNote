@@ -77,14 +77,27 @@ fun NoteDetailContent(
 
                 Spacer(Modifier.height(16.dp))
 
+                val maxChars = 500
                 OutlinedTextField(
                     value = text,
-                    onValueChange = onTextChange,
+                    onValueChange = { if (it.length <= maxChars) onTextChange(it) },
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxWidth(),
                     placeholder = { Text("Write your note…") },
                     shape = RoundedCornerShape(18.dp)
+                )
+
+                Text(
+                    text = "${text.length} / $maxChars",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = if (text.length >= maxChars)
+                        MaterialTheme.colorScheme.error
+                    else
+                        MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
+                    modifier = Modifier
+                        .align(Alignment.End)
+                        .padding(end = 4.dp, top = 2.dp)
                 )
 
                 Spacer(Modifier.height(8.dp))

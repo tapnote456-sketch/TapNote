@@ -75,14 +75,27 @@ fun QuickNoteContent(
                         style = MaterialTheme.typography.titleMedium
                     )
 
+                    val maxChars = 500
                     OutlinedTextField(
                         value = text,
-                        onValueChange = onTextChange,
+                        onValueChange = { if (it.length <= maxChars) onTextChange(it) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .heightIn(min = 100.dp, max = 180.dp)
                             .focusRequester(focusRequester),
                         placeholder = { Text("Write something…") }
+                    )
+
+                    Text(
+                        text = "${text.length} / $maxChars",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = if (text.length >= maxChars)
+                            MaterialTheme.colorScheme.error
+                        else
+                            MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
+                        modifier = Modifier
+                            .align(Alignment.End)
+                            .padding(end = 4.dp, top = 2.dp)
                     )
 
                     Button(
