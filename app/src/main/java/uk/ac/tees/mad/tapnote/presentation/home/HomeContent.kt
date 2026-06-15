@@ -70,7 +70,14 @@ fun HomeContent(
                     style = MaterialTheme.typography.headlineSmall,
                     fontWeight = FontWeight.SemiBold
                 )
-
+                Text(
+                    text = "${notes.size} ${if (notes.size == 1) "note" else "notes"} saved",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.55f),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 4.dp)
+                )
                 Spacer(Modifier.height(16.dp))
 
                 if (notes.isEmpty()) {
