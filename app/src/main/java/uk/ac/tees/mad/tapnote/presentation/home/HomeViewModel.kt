@@ -1,6 +1,9 @@
 package uk.ac.tees.mad.tapnote.presentation.home
 
 import android.app.Application
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.SharingStarted
@@ -18,6 +21,9 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val database = TapNoteDatabase.getInstance(application)
     private val repository = NotesRepository(database.noteDao())
 
+    var isLoading by mutableStateOf(true)
+        private set
+
     val notes: StateFlow<List<NoteUiModel>> =
         repository.getNotes()
             .map { list -> list.map { it.toUiModel() } }
@@ -26,6 +32,14 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                 started = SharingStarted.WhileSubscribed(5_000),
                 initialValue = emptyList()
             )
+
+    init {
+        viewModelScope.launch {
+            repository.getNotes().collect {
+                isLoading = false
+            }
+        }
+    }
 
     fun deleteNote(note: NoteUiModel) {
         viewModelScope.launch {

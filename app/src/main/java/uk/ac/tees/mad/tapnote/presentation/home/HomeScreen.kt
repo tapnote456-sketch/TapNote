@@ -19,6 +19,7 @@ fun HomeScreen(
     HomeContent(
         modifier = modifier,
         notes = notes,
+        isLoading = viewModel.isLoading,
         onAddNoteClick = onAddNoteClick,
         onNoteClick = onNoteClick,
         onDeleteNote = viewModel::deleteNote
@@ -42,6 +43,7 @@ fun HomePreview() {
                     timestamp = "Yesterday, 8:15 PM"
                 )
             ),
+            isLoading = false,
             onAddNoteClick = {},
             onNoteClick = {},
             onDeleteNote = {}

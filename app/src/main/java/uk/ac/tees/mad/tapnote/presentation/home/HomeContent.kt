@@ -9,13 +9,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.Button
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -27,14 +29,13 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.filled.Edit
 import uk.ac.tees.mad.tapnote.presentation.components.NoteItem
 
 @Composable
 fun HomeContent(
     modifier: Modifier = Modifier,
     notes: List<NoteUiModel>,
+    isLoading: Boolean = false,
     onAddNoteClick: () -> Unit,
     onNoteClick: (NoteUiModel) -> Unit,
     onDeleteNote: (NoteUiModel) -> Unit
@@ -80,7 +81,16 @@ fun HomeContent(
                 )
                 Spacer(Modifier.height(16.dp))
 
-                if (notes.isEmpty()) {
+                if (isLoading) {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator(
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                } else if (notes.isEmpty()) {
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
