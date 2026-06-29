@@ -28,6 +28,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -134,6 +135,18 @@ fun SettingsContent(
                 ) {
                     Text("Logout")
                 }
+
+                Spacer(modifier = Modifier.weight(1f))
+
+                Text(
+                    text = "TapNote v1.0",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 24.dp),
+                    textAlign = TextAlign.Center
+                )
             }
         }
     }
