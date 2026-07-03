@@ -16,6 +16,8 @@ fun AuthScreen(
 
     AuthContent(
         state = state,
+        emailError = viewModel.emailError,
+        passwordError = viewModel.passwordError,
         onEmailChange = viewModel::onEmailChange,
         onPasswordChange = viewModel::onPasswordChange,
         onSubmit = { viewModel.submit(onAuthSuccess) },

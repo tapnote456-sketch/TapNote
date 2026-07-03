@@ -33,6 +33,8 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun AuthContent(
     state: AuthUiState,
+    emailError: String = "",
+    passwordError: String = "",
     onEmailChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onSubmit: () -> Unit,
@@ -94,7 +96,15 @@ fun AuthContent(
                         value = state.email,
                         onValueChange = onEmailChange,
                         label = { Text("Email") },
-                        isError = !state.isEmailValid,
+                        isError = emailError.isNotEmpty(),
+                        supportingText = {
+                            if (emailError.isNotEmpty()) {
+                                Text(
+                                    text = emailError,
+                                    color = MaterialTheme.colorScheme.error
+                                )
+                            }
+                        },
                         modifier = Modifier.fillMaxWidth(),
                         singleLine = true,
                         colors = OutlinedTextFieldDefaults.colors(
@@ -110,8 +120,16 @@ fun AuthContent(
                         value = state.password,
                         onValueChange = onPasswordChange,
                         label = { Text("Password") },
+                        isError = passwordError.isNotEmpty(),
+                        supportingText = {
+                            if (passwordError.isNotEmpty()) {
+                                Text(
+                                    text = passwordError,
+                                    color = MaterialTheme.colorScheme.error
+                                )
+                            }
+                        },
                         visualTransformation = PasswordVisualTransformation(),
-                        isError = !state.isPasswordValid,
                         modifier = Modifier.fillMaxWidth(),
                         singleLine = true,
                         colors = OutlinedTextFieldDefaults.colors(
@@ -125,7 +143,6 @@ fun AuthContent(
 
                     Button(
                         onClick = onSubmit,
-                        enabled = state.canSubmit,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(54.dp),
