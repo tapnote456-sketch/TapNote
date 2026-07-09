@@ -3,6 +3,7 @@ package uk.ac.tees.mad.tapnote.presentation.quicknote
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -75,35 +76,37 @@ fun QuickNoteContent(
                         style = MaterialTheme.typography.titleMedium
                     )
 
-                    val maxChars = 500
+                    val maxChars = 300
                     OutlinedTextField(
                         value = text,
                         onValueChange = { if (it.length <= maxChars) onTextChange(it) },
+                        placeholder = { Text("What's on your mind?") },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .heightIn(min = 100.dp, max = 180.dp)
+                            .heightIn(min = 120.dp)
                             .focusRequester(focusRequester),
-                        placeholder = { Text("Write something…") }
+                        maxLines = 8
                     )
 
-                    Text(
-                        text = "${text.length} / $maxChars",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = if (text.length >= maxChars)
-                            MaterialTheme.colorScheme.error
-                        else
-                            MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
-                        modifier = Modifier
-                            .align(Alignment.End)
-                            .padding(end = 4.dp, top = 2.dp)
-                    )
-
-                    Button(
-                        onClick = onSaveClick,
+                    Row(
                         modifier = Modifier.fillMaxWidth(),
-                        enabled = text.isNotBlank()
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text("Save")
+                        Text(
+                            text = "${text.length} / $maxChars",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = if (text.length >= maxChars)
+                                MaterialTheme.colorScheme.error
+                            else
+                                MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+                        )
+                        Button(
+                            onClick = onSaveClick,
+                            enabled = text.isNotBlank()
+                        ) {
+                            Text("Save")
+                        }
                     }
                 }
             }
