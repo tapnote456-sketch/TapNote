@@ -1,5 +1,9 @@
 package uk.ac.tees.mad.tapnote.presentation.note
 
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -19,6 +23,7 @@ fun NoteDetailScreen(
     onBack: () -> Unit
 ) {
     val note by viewModel.note.collectAsState()
+    val snackbarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(noteId) {
         viewModel.loadNote(noteId)
@@ -28,21 +33,31 @@ fun NoteDetailScreen(
         mutableStateOf(note?.content ?: "")
     }
 
-    note?.let {
-        NoteDetailContent(
-            note = it,
-            text = text,
-            onTextChange = { text = it },
-            onSave = {
-                viewModel.save(text)
-                onBack()
-            },
-            onDelete = {
-                viewModel.delete()
-                onBack()
-            },
-            modifier = modifier
-        )
+    LaunchedEffect(viewModel.noteDeleted) {
+        if (viewModel.noteDeleted) {
+            snackbarHostState.showSnackbar("Note deleted")
+            onBack()
+        }
+    }
+
+    Scaffold(
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
+    ) { paddingValues ->
+        note?.let {
+            NoteDetailContent(
+                note = it,
+                text = text,
+                onTextChange = { text = it },
+                onSave = {
+                    viewModel.save(text)
+                    onBack()
+                },
+                onDelete = {
+                    viewModel.delete()
+                },
+                modifier = modifier.padding(paddingValues)
+            )
+        }
     }
 }
 
